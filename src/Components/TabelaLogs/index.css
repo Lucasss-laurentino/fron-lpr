@@ -1,0 +1,25 @@
+.div-tabela-logs {
+    overflow-x: auto;
+    max-height: 73vh;
+    overflow-y: auto;
+}
+.tabela-logs {
+    width: 100%;
+    background-color: white;
+}
+.tabela-logs th, td
+{
+    max-width: 200px;
+    height: 50px;
+    border: 1px solid #cecaca;
+    padding: 10px;
+    white-space: nowrap;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.tabela-logs td
+:hover {
+    color: white;
+    background-color: #3955A5;
+}

@@ -1,0 +1,35 @@
+.cor-logs {
+    color: #787A84;
+}
+
+.btn-gerar-relatorio {
+    height: 100%;
+    color: white;
+    background-color: #3955A5;
+}
+
+.input-data {
+    color: white;
+    height: 33px;
+    padding: 0px 10px;
+    background-color: #3955A5;
+    border: none;
+    border-radius: 3px;
+    position: relative;
+
+}
+
+.input-data::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.input-data::after {
+    content: '📅'; /* Você pode usar um ícone SVG aqui */
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}

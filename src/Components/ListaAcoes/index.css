@@ -1,0 +1,28 @@
+.divListaAcoes {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin: 10px 0px;
+}
+
+.btn-novo {
+    color: white;
+    background-color: #3955A5;
+
+    border: none;
+    border-radius: 4px;
+    border: 1px solid #3955A5;
+    padding: 4px 20px;
+
+    font-weight: 600;
+
+    margin: 0px 2px;
+}
+.btn-novo:hover {
+    background-color: white;
+    border: 1px solid #3955A5;
+    color: #3955A5;
+}
