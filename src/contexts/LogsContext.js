@@ -14,20 +14,19 @@ export const LogsProvider = ({ children }) => {
 
     const pegarLogs = async () => {
         try {
-
             const dateFormated = date.replaceAll('/', '-');
-
             const response = await http.post('Log/getDatePlate', {
                 date: dateFormated,
                 page,
                 pageSize,
                 search: search.toUpperCase()
             });
-
             if (!response?.data) throw new Error("Falha na requisição");
-
-            setLogs([...response.data]);
-
+            const logsResponse = response.data.map((log) => {
+                log.DataHora = new Date(log.DataHora).toLocaleString('pt-BR')
+                return log;
+            });
+            setLogs([...logsResponse]);
         } catch (error) {
             console.log(error);
         }

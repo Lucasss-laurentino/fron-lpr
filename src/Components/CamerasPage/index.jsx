@@ -10,9 +10,8 @@ export const CamerasPage = () => {
 
     const [modalShow, setModalShow] = useState(false);
     const [modalShowDelete, setModalShowDelete] = useState(false);
-    const [modalShowEditar, setModalShowEditar] = useState(false);
 
-    const { pegarCameras } = useContext(CamerasContext);
+    const { pegarCameras, setModalShowEditar } = useContext(CamerasContext);
 
     const abrirModalADC = () => {
         setModalShow(true)
@@ -25,7 +24,6 @@ export const CamerasPage = () => {
     const abrirModalEditar = () => {
         setModalShowEditar(true)
     }
-
 
     useEffect(() => {
         pegarCameras();
@@ -41,10 +39,7 @@ export const CamerasPage = () => {
             show={modalShowDelete}
             onHide={() => setModalShowDelete(false)}        
         />
-        <ModalEditar
-            show={modalShowEditar}
-            onHide={() => setModalShowEditar(false)}                
-        />
+        <ModalEditar/>
             <div className="col-12 pt-3 d-flex justify-content-between">
                 <h3 className="cor-logs">Câmeras</h3>
                 <p class="m-0">Gateway - 192.168.0.0</p>

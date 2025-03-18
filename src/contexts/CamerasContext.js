@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { http } from "../http/htpp";
 
 export const CamerasContext = createContext();
@@ -6,9 +6,9 @@ export const CamerasContext = createContext();
 export const CamerasProvider = ({ children }) => {
 
     const [cameras, setCameras] = useState([]);
-
     const [cameraSelecionada, setCameraSelecionada] = useState([]);
     const [keys, setKeys] = useState([]);
+    const [modalShowEditar, setModalShowEditar] = useState(false);
 
     const criarCamera = () => {
         try {
@@ -51,6 +51,16 @@ export const CamerasProvider = ({ children }) => {
             const alphadigi = await formatarCameraEditar();
             const response = await http.put('/camera/update', alphadigi);
             if(!response) throw new Error("Erro ao editar câmera");
+            if(response.status === 200) {
+                const camerasFiltrada = cameras.map((camera) => {
+                    if(camera?.id === alphadigi.id) {
+                        camera = alphadigi;
+                    }
+                    return camera;
+                });
+                setCameras(camerasFiltrada);
+                setModalShowEditar(false);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -89,10 +99,11 @@ export const CamerasProvider = ({ children }) => {
 
     const formatarCameraEditar = async () => {
         const alphadigi = cameraSelecionada;
-        alphadigi.sentido = alphadigi.sentido.toUpperCase() === 'ENTRADA' ? true : false
+        if(typeof alphadigi?.sentido === 'string') {
+            alphadigi.sentido = alphadigi.sentido.toUpperCase() === 'ENTRADA' ? true : false
+        }
         return alphadigi;
     }
-
 
     return (
         <CamerasContext.Provider value={{
@@ -107,9 +118,10 @@ export const CamerasProvider = ({ children }) => {
             cameras,
             setCameras,
             formatIP,
+            modalShowEditar, 
+            setModalShowEditar,
         }}>
             {children}
-        </CamerasContext.Provider>
-    
+        </CamerasContext.Provider> 
 )
 }

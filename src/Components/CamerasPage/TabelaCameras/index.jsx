@@ -5,7 +5,7 @@ import { CamerasContext } from "../../../contexts/CamerasContext"
 
 export const TabelaCameras = ({ abrirModalADC, abrirModalDelete, abrirModalEditar }) => {
 
-    const { keys, cameras, setCameraSelecionada, cameraSelecionada } = useContext(CamerasContext);
+    const { keys, cameras, setCameraSelecionada } = useContext(CamerasContext);
 
     return (
         <>

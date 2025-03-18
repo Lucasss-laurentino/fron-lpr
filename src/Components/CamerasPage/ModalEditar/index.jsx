@@ -4,7 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { CamerasContext } from '../../../contexts/CamerasContext';
 
-export const ModalEditar = ({ show, onHide }) => {
+export const ModalEditar = () => {
+
+    const { modalShowEditar, setModalShowEditar } = useContext(CamerasContext);
+
+    const onHide = () => {
+        setModalShowEditar(false)
+    }
 
     const { 
         cameraSelecionada, 
@@ -31,7 +37,7 @@ export const ModalEditar = ({ show, onHide }) => {
     return (
         <>
             <Modal
-                show={show}
+                show={modalShowEditar}
                 onHide={onHide}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
