@@ -1,0 +1,18 @@
+.div-btn-table-logs {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 20px;
+}
+
+.div-btn-table-logs > button {
+    background-color: #3955A5;
+    color: white;
+}
+
+.div-btn-table-logs > button:hover {
+    border: 1px solid #3955A5;
+    color: #3955A5;
+}

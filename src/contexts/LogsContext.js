@@ -33,8 +33,9 @@ export const LogsProvider = ({ children }) => {
     }
 
     return (
-        <LogsContext.Provider value={{ pegarLogs, logs, date, page, pageSize, search, setSearch }}>
+        <LogsContext.Provider value={{ pegarLogs, logs, date, page, pageSize, search, setSearch, setPage }}>
             {children}
         </LogsContext.Provider>
-    )
+ 
+)
 }

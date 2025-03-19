@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { TabelaLogs } from "../TabelaLogs"
 import { LogsContext } from "../../contexts/LogsContext";
+import './index.css';
 
 export const LogsPage = () => {
 
-    const { pegarLogs, logs } = useContext(LogsContext);
+    const { pegarLogs, logs, setPage, page } = useContext(LogsContext);
 
     useEffect(() => {
         pegarLogs();
-    }, []);
+    }, [page]);
 
     const [data, setData] = useState(() => {
         const hoje = new Date();
@@ -32,6 +33,10 @@ export const LogsPage = () => {
             </div>
             <div className="col-12 pt-4">
                 <TabelaLogs logs={logs} />
+                <div class="div-btn-table-logs">
+                    <button class="btn btn-lg" onClick={() => setPage(page === 1 ? 1 : page - 1)}>Anterior</button>
+                    <button class="btn btn-lg" onClick={() => setPage(page+ 1)}>Próximo</button>
+                </div>
             </div>
 
         </>

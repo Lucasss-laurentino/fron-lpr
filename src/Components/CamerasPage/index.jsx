@@ -42,7 +42,7 @@ export const CamerasPage = () => {
         <ModalEditar/>
             <div className="col-12 pt-3 d-flex justify-content-between">
                 <h3 className="cor-logs">Câmeras</h3>
-                <p class="m-0">Gateway - 192.168.0.0</p>
+                {/* <p class="m-0">Gateway - 192.168.0.0</p> */}
                 <button className='btn btn-sm btn-gerar-relatorio'>Gerar relatório</button>
             </div>
             <div className="col-12 pt-4">
@@ -51,7 +51,7 @@ export const CamerasPage = () => {
                     abrirModalDelete={abrirModalDelete}
                     abrirModalEditar={abrirModalEditar}
                 />
-            </div>        
+            </div>      
         </>
     )
 }
