@@ -7,7 +7,7 @@ export const Navbar = () => {
     const { search, setSearch, pegarLogs } = useContext(LogsContext);
 
     useEffect(() => {
-        pegarLogs();
+        pegarLogs(); // é chamada aqui pra escutar search
     }, [search])
 
     return (

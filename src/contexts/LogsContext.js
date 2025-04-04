@@ -5,7 +5,13 @@ export const LogsContext = createContext();
 
 export const LogsProvider = ({ children }) => {
 
-    const [date, setDate] = useState(new Date().toLocaleDateString());
+    const [date, setDate] = useState(() => {
+        const hoje = new Date();
+        const ano = hoje.getFullYear();
+        const mes = (hoje.getMonth() + 1).toString().padStart(2, 0)  // Adiciona o zero à frente se necessário
+        const dia = hoje.getDate().toString().padStart(2, 0)
+        return `${ano}-${mes}-${dia}`
+    });
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [search, setSearch] = useState("");
@@ -14,26 +20,41 @@ export const LogsProvider = ({ children }) => {
 
     const pegarLogs = async () => {
         try {
-            const dateFormated = date.replaceAll('/', '-');
             const response = await http.post('Log/getDatePlate', {
-                date: dateFormated,
+                date,
                 page,
                 pageSize,
                 search: search.toUpperCase()
             });
             if (!response?.data) throw new Error("Falha na requisição");
-            const logsResponse = response.data.map((log) => {
-                log.DataHora = new Date(log.DataHora).toLocaleString('pt-BR')
-                return log;
-            });
-            setLogs([...logsResponse]);
+            const dadosFormatados = await formatarDados(response.data);
+            setLogs([...dadosFormatados]);
         } catch (error) {
             console.log(error);
         }
     }
 
+    const formatarDados = async (logsResponse) => {
+        const objsLogsFormated = logsResponse.map((log) => {
+            const hora = log.DataHora.split("T")[1].split(".");
+            let objTemp = {
+                "Id": log.Id,
+                "Hora": hora[0],
+                "Placa": log.Placa,
+                "Liberado": log.Liberado,
+                "Acesso": log.Acesso,
+                "Ip": log.Alphadigi.Ip,
+                "Carro_Img": log.Carro_Img,
+                "Cadastrado": log.Cadastrado,
+                "Processado": log.Processado,
+            };
+            return objTemp;
+        });
+        return objsLogsFormated;
+    }
+
     return (
-        <LogsContext.Provider value={{ pegarLogs, logs, date, page, pageSize, search, setSearch, setPage }}>
+        <LogsContext.Provider value={{ pegarLogs, logs, date, setDate, page, pageSize, search, setSearch, setPage }}>
             {children}
         </LogsContext.Provider>
  

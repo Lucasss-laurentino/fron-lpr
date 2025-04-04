@@ -5,19 +5,11 @@ import './index.css';
 
 export const LogsPage = () => {
 
-    const { pegarLogs, logs, setPage, page } = useContext(LogsContext);
+    const { pegarLogs, logs, setPage, page, date, setDate } = useContext(LogsContext);
 
     useEffect(() => {
-        pegarLogs();
-    }, [page]);
-
-    const [data, setData] = useState(() => {
-        const hoje = new Date();
-        const ano = hoje.getFullYear();
-        const mes = (hoje.getMonth() + 1).toString().padStart(2, 0)  // Adiciona o zero à frente se necessário
-        const dia = hoje.getDate().toString().padStart(2, 0)
-        return `${ano}-${mes}-${dia}`
-    });
+        pegarLogs(); // é chamada aqui pra escutar page ou data
+    }, [page, date]);
 
     return (
         <>
@@ -26,8 +18,9 @@ export const LogsPage = () => {
                 <input
                     type="date"
                     className='input-data'
-                    value={data}
-                    onChange={(e) => setData(e.target.value)}
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    onClick={(e) => e.target.showPicker()}
                 />
                 <button className='btn btn-sm btn-gerar-relatorio'>Gerar relatório</button>
             </div>
